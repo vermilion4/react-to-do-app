@@ -20,15 +20,13 @@ export class SignIn extends React.Component{
             headers: {
             'Content-Type' : 'application/json',
             'Accept': 'application/json'},
-            body: JSON.stringify({
+            body:JSON.stringify({
                 username,
-                password
+                password, 
             })
         })
-     
-    .then(res => res.text())          // convert to plain text
+        .then(res => res.text())          // convert to plain text
   .then(text => console.log(text))
-   
 }
 
     handleUsername(username){
