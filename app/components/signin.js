@@ -1,4 +1,9 @@
 import React from 'react';
+import { Switch, Route, withRouter, Link }from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { SigninView } from './view/signin';
+import { SignUp } from './signup';
+import { App } from './App';
 
 export class SignIn extends React.Component{
     constructor(props){
@@ -6,27 +11,55 @@ export class SignIn extends React.Component{
         this.state= {
             username: '',
             password: '',
-            disable:true
+            disable:true,
+            errMessage: '',
+            isSignIn: true,
+            isHome: false
            
         }
         this.handleUsername = this.handleUsername.bind(this)
         this.handlePassword = this.handlePassword.bind(this)
+        this.validateForm = this.validateForm.bind(this)
         this.logIn = this.logIn.bind(this)
     }
+
+
     async logIn (username, password){
         var url="https://to-do-express-app.herokuapp.com/login"
-        await fetch(url, {
+        var loginFetch = await fetch(url, {
             method: "POST",
             headers: {
-            'Content-Type' : 'application/json',
-            'Accept': 'application/json'},
+            'Content-Type' : 'application/json'},
             body:JSON.stringify({
                 username,
-                password, 
+                password
             })
+            
         })
-        .then(res => res.text())          // convert to plain text
-  .then(text => console.log(text))
+        var response = await loginFetch
+        var res = await response.json()
+        console.log(res)
+        if(res.username){
+            console.log("Log in successful")
+            this.setState({
+                isHome : true,
+                errMessage: '',
+                isSignIn: false
+            })
+            return <App />
+        }
+        else if(res.text){
+            console.log(res.text)
+            this.setState({
+                errMessage : res.text
+            })
+        }
+        else{
+            this.setState({
+                errMessage: "Error has occurred"
+            })
+        }
+      
 }
 
     handleUsername(username){
@@ -66,16 +99,24 @@ export class SignIn extends React.Component{
         }
     }
     render() {
-        return(
         
-                <div>
-                    <p>{this.state.errMessage}</p>
-                <p>Username: <input type = "text" placeholder = "Enter Username" name = "username"  onChange={this.handleUsername} value={this.state.username}/></p>
-                <p>Password: <input type = "password" placeholder = "Enter Password" name = "password" onChange={this.handlePassword}value={this.state.password}/></p>
-                <button onClick={()=>this.logIn(this.state.username, this.state.password)} disabled={this.state.disable}>Log In</button>
-            </div>
+            if(this.state.isSignIn){
+                return <SigninView 
+                    password={ this.state.password}
+                    username= {this.state.username}
+                    disable= { this.state.disable}
+                    handlePassword= {this.handlePassword}
+                    handleUsername = {this.handleUsername}
+                    logIn= { this.logIn}
+                    errMessage= { this.state.errMessage}
+                    />
+            }
+            else if (this.state.isHome){
+                return <App />
+            }
+            else{
+                return <SignUp />
+            }
             
-        
-        );
     }
 }
