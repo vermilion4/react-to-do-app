@@ -1,9 +1,10 @@
 import React from 'react'
 import { Switch, Route, withRouter, Link }from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { SignUp } from '../signup'
+import { SignUp } from '../signup';
+import PropTypes from 'prop-types';
 
-
+//this just shows the login page.
  class View extends React.Component{
     render(){
         return(
@@ -35,11 +36,21 @@ export class SigninView extends React.Component{
                                 logIn={this.props.logIn}
                             /> 
                         }/>
-                        />
+                        
                         <Route path="/signup" component={SignUp} />
                     </Switch>
                 </section>
                 </Router>
             )
         }
+}
+
+View.propTypes = {
+    password : PropTypes.string.isrequired,
+    username : PropTypes.string.isrequired,
+    handlePassword : PropTypes.func.isrequired,
+    handleUsername : PropTypes.func.isrequired,
+    disable : PropTypes.bool.isrequired,
+    errMessage : PropTypes.string.isrequired,
+    logIn : PropTypes.func.isrequired
 }

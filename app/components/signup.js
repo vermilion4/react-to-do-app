@@ -1,4 +1,6 @@
 import React from 'react';
+import {SignupView} from './view/signin';
+import { App } from './App';
 
 export class SignUp extends React.Component{
     constructor(props){
@@ -14,8 +16,9 @@ export class SignUp extends React.Component{
             phoneNumber: '',
             address: '',
             state: '',
-            disable:true
-           
+            disable:true,
+           isSignup:true,
+           isHome:false
         }
         this.handleFirstname = this.handleFirstname.bind(this)
         this.handleLastname = this.handleLastname.bind(this)
@@ -54,6 +57,11 @@ export class SignUp extends React.Component{
         console.log(res)
         if(res.firstName && res.username){
             console.log("Registration successful")
+            this.setState({
+                isHome : true,
+                isSignup: false
+            })
+            return <App />
         }
         else if(res.text){
             console.log(res.text)
@@ -217,24 +225,38 @@ validateForm() {
 }
       
     render() {
-        return(
-           
-            <div>
-                <p>FirstName: <input type = "text" placeholder = "Enter Firstname" name = "firstName" value={this.state.firstName} onChange={this.handleFirstname}/></p>
-                <p>LastName: <input type = "text" placeholder = "Enter Lastname" name = "lastName" value={this.state.lastName} onChange={this.handleLastname}/></p>
-                <p>Username: <input type = "text" placeholder = "Enter Username" name = "userName" value={this.state.username} onChange={this.handleUsername}/></p>
-                <p>Password: <input type = "password" placeholder = "Enter Password" name = "password" value={this.state.password} onChange={this.handlePassword}/></p>
-                <p>Bio: <input type = "text" placeholder = "Enter Bio" name = "bio" value={this.state.bio} onChange={this.handleBio}/></p>
-                <p>Email: <input type = "email" placeholder = "Enter Email" name = "email" value={this.state.email} onChange={this.handleEmail}/></p>
-                <p>Gender: <input type = "text" placeholder = "Enter Gender" name = "gender" value={this.state.gender} onChange={this.handleGender}/></p>
-                <p>PhoneNumber: <input type = "text" placeholder = "Enter PhoneNumber" name = "phoneNumber" value={this.state.phoneNumber} onChange={this.handlePhonenumber}/></p>  
-                <p>Address: <input type = "text" placeholder = "Enter Address" name = "address" value={this.state.address} onChange={this.handleAddress}/></p>    
-                <p>State: <input type = "text" placeholder = "Enter State" name = "state" value={this.state.state} onChange={this.handleState}/></p>     
-                <button onClick={()=>this.signUp ( this.state.firstName,this.state.lastName,this.state.username,this.state.password,
-                this.state.bio,this.state.email,this.state.gender,this.state.phoneNumber,this.state.address,this.state.state)} 
-                disabled={this.state.disable}>Sign Up</button>
-            </div>
-             
-        )
+            if(this.state.isSignUp){
+                return <SignupView 
+                firstName= {this.state.firstName}
+                lastName= {this.state.lastName}
+                username= {this.state.username}
+                password= {this.state.password}
+                bio= {this.state.bio}
+                email= {this.state.email}
+                gender= {this.state.gender}
+                phoneNumber= {this.state.phoneNumber}
+                address= {this.state.address}
+                state= {this.state.state}
+                disable={this.state.disable}
+                signUp={this.state.signUp}
+                handleFirstname={this.state.handleFirstname}
+                handleLastname={this.state.handleLastname}
+                handleUsername={this.state.handleUsername}
+                handlePassword={this.state.handlePassword}
+                handleBio={this.state.handleBio}
+                handleEmail={this.state.handleEmail}
+                handleGender={this.state.handleGender}
+                handlePhonenumber={this.state.handlePhonenumber}
+                handleAddress={this.state.handleAddress}
+                handleState={this.state.handleState}
+                />
+            }
+                else if (this.state.isHome){
+                    return <App />
+                }
+                else{
+                    return <SignUp />
+                }
+        
     }
 }
