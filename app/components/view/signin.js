@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
         return(
                 <div>
                     <p style={{color: 'red'}} >{this.props.errMessage}</p>
-                    <input placeholder="Username" name='username' type='text' value={this.props.username}  onChange= {this.props.handleUsername}/> <br />
+                    <input placeholder="Username" name='username' type='text' value={this.props.username} onChange= {this.props.handleUsername}/> <br />
                     <input placeholder='Password' type='password' name='password' value={this.props.password} onChange= {this.props.handlePassword} /> <br />
                     <button onClick= {()=> this.props.logIn(this.props.username, this.props.password) } disabled={ this.props.disable}>Log In</button> <br />
                     <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
@@ -46,11 +46,11 @@ export class SigninView extends React.Component{
 }
 
 View.propTypes = {
-    password : PropTypes.string.isrequired,
-    username : PropTypes.string.isrequired,
-    handlePassword : PropTypes.func.isrequired,
-    handleUsername : PropTypes.func.isrequired,
-    disable : PropTypes.bool.isrequired,
-    errMessage : PropTypes.string.isrequired,
-    logIn : PropTypes.func.isrequired
+    password : PropTypes.string.isRequired,
+    username : PropTypes.string.isRequired,
+    handlePassword : PropTypes.func,
+    handleUsername : PropTypes.func,
+    disable : PropTypes.bool.isRequired,
+    errMessage : PropTypes.string.isRequired,
+    logIn : PropTypes.func
 }

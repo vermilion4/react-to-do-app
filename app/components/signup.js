@@ -1,5 +1,5 @@
 import React from 'react';
-import {SignupView} from './view/signin';
+import {SignupView} from './view/signup';
 import { App } from './App';
 
 export class SignUp extends React.Component{
@@ -31,6 +31,7 @@ export class SignUp extends React.Component{
         this.handleAddress = this.handleAddress.bind(this)
         this.handleState = this.handleState.bind(this)
         this.validateForm = this.validateForm.bind(this)
+        this.signUp = this.signUp.bind(this)
     }
     async signUp ( firstName,lastName,username,password,bio,email,gender,phoneNumber,address,state){
         var url="https://to-do-express-app.herokuapp.com/signup"
@@ -225,7 +226,7 @@ validateForm() {
 }
       
     render() {
-            if(this.state.isSignUp){
+            if(this.state.isSignup){
                 return <SignupView 
                 firstName= {this.state.firstName}
                 lastName= {this.state.lastName}
@@ -238,17 +239,17 @@ validateForm() {
                 address= {this.state.address}
                 state= {this.state.state}
                 disable={this.state.disable}
-                signUp={this.state.signUp}
-                handleFirstname={this.state.handleFirstname}
-                handleLastname={this.state.handleLastname}
-                handleUsername={this.state.handleUsername}
-                handlePassword={this.state.handlePassword}
-                handleBio={this.state.handleBio}
-                handleEmail={this.state.handleEmail}
-                handleGender={this.state.handleGender}
-                handlePhonenumber={this.state.handlePhonenumber}
-                handleAddress={this.state.handleAddress}
-                handleState={this.state.handleState}
+                signUp={this.signUp}
+                handleFirstname={this.handleFirstname}
+                handleLastname={this.handleLastname}
+                handleUsername={this.handleUsername}
+                handlePassword={this.handlePassword}
+                handleBio={this.handleBio}
+                handleEmail={this.handleEmail}
+                handleGender={this.handleGender}
+                handlePhonenumber={this.handlePhonenumber}
+                handleAddress={this.handleAddress}
+                handleState={this.handleState}
                 />
             }
                 else if (this.state.isHome){

@@ -14,8 +14,8 @@ export class SignupView extends React.Component{
             <p>Gender: <input type = "text" placeholder = "Enter Gender" name = "gender" value={this.props.gender} onChange={this.props.handleGender}/></p>
             <p>PhoneNumber: <input type = "text" placeholder = "Enter PhoneNumber" name = "phoneNumber" value={this.props.phoneNumber} onChange={this.props.handlePhonenumber}/></p>  
             <p>Address: <input type = "text" placeholder = "Enter Address" name = "address" value={this.props.address} onChange={this.props.handleAddress}/></p>    
-            <p>State: <input type = "text" placeholder = "Enter State" name = "state" value={this.props.props} onChange={this.props.handleState}/></p>     
-            <button onClick={()=>this.signUp ( this.props.firstName,this.props.lastName,this.props.username,this.props.password,
+            <p>State: <input type = "text" placeholder = "Enter State" name = "state" value={this.props.state} onChange={this.props.handleState}/></p>     
+            <button onClick={()=>this.props.signUp ( this.props.firstName,this.props.lastName,this.props.username,this.props.password,
             this.props.bio,this.props.email,this.props.gender,this.props.phoneNumber,this.props.address,this.props.state)} 
             disabled={this.props.disable}>Sign Up</button>
         </div>
@@ -24,27 +24,26 @@ export class SignupView extends React.Component{
 }
 
 SignupView.propTypes = {
-    firstName:PropTypes.string.isrequired,
-    lastName:PropTypes.string.isrequired,
-    password : PropTypes.string.isrequired,
-    username : PropTypes.string.isrequired,
-    bio:PropTypes.string.isrequired,
-    email:PropTypes.string.isrequired,
-    gender:PropTypes.string.isrequired,
-    phoneNumber:PropTypes.string.isrequired,
-    address:PropTypes.string.isrequired,
-    state:PropTypes.string.isrequired,
-    handleFirstname : PropTypes.func.isrequired,
-    handleLastname : PropTypes.func.isrequired,
-    handlePassword : PropTypes.func.isrequired,
-    handleUsername : PropTypes.func.isrequired,
-    handleBio : PropTypes.func.isrequired,
-    handleEmail : PropTypes.func.isrequired,
-    handleGender : PropTypes.func.isrequired,
-    handlePhonenumber : PropTypes.func.isrequired,
-    handleAddress : PropTypes.func.isrequired,
-    handleState : PropTypes.func.isrequired,
-    disable : PropTypes.bool.isrequired,
-    errMessage : PropTypes.string.isrequired,
-    logIn : PropTypes.func.isrequired
+    firstName:PropTypes.string.isRequired,
+    lastName:PropTypes.string.isRequired,
+    password : PropTypes.string.isRequired,
+    username : PropTypes.string.isRequired,
+    bio:PropTypes.string.isRequired,
+    email:PropTypes.string.isRequired,
+    gender:PropTypes.string.isRequired,
+    phoneNumber:PropTypes.string.isRequired,
+    address:PropTypes.string.isRequired,
+    state:PropTypes.string.isRequired,
+    handleFirstname : PropTypes.func,
+    handleLastname : PropTypes.func,
+    handlePassword : PropTypes.func,
+    handleUsername : PropTypes.func,
+    handleBio : PropTypes.func,
+    handleEmail : PropTypes.func,
+    handleGender : PropTypes.func,
+    handlePhonenumber : PropTypes.func,
+    handleAddress : PropTypes.func,
+    handleState : PropTypes.func,
+    disable : PropTypes.bool.isRequired,
+    signUp : PropTypes.func
 }
